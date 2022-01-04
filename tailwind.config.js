@@ -8,11 +8,13 @@ module.exports = {
     extend: {
       width: {
         '40-r': '40rem',
-        '35-r': '35rem'
+        '35-r': '35rem',
+        '23-r': '23rem',
       },
       height: {
         '40-r': '40rem',
-        '35-r': '35rem'
+        '35-r': '35rem',
+        '5-r': '5rem'
       },
       boxShadow: {
         '5xl': '20px 20px 50px rgba(0, 0, 0, 0.5)'

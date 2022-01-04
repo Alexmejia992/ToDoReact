@@ -1,11 +1,11 @@
+import { stringify } from "postcss";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 
 import shortid from "shortid";
-import Container from "../Components/Container";
-import Layout from "../Components/Layouts/Layout";
-import SideBar from "../Components/SideBar";
-
+import Container from "./Container";
+import Tasks from "./Tasks";
 
 export default function IndexPage() {
     const [tasks, setTasks] = useState([
@@ -14,15 +14,17 @@ export default function IndexPage() {
     
       const [task, setTask] = useState("");
       const [description, setDescription] = useState("");
+
+      let navigate = useNavigate();
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        // const {name, value} = event.target;
-        // alert(name);
         setTasks([...tasks, { task, description, id: shortid.generate() }]);
+        // console.log(tasks);
         setTask("");
-        setDescription("");
-        alert(task)
+        setDescription(""); 
+        
+        navigate('tasks')
       };
     
       const removeTask = (id) => {
@@ -47,24 +49,25 @@ export default function IndexPage() {
             onChange={(e) => setTask(e.target.value)}
             required
           />
-          <input
+          <textarea 
+            rows="2"
             className="input-text"
             type="text"
             placeholder="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          />
+          ></textarea>
           <input
             type="Submit"
             value="create"
             className="cursor-pointer font-poppins rounded-full px-5 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
           />
         </form>
-        {/* { tasks.length === 0 ? <h1>No Tasks Found</h1> :  tasks.map((item) => {
-          return(
-            < Tasks key={item.id} data={item.task} description={item.description} id={item.id} handleClick={removeTask} />
-          )
-        })} */}
+        {/* {
+          tasks.map((items) =>  (
+            console.log(items)
+          ))
+        } */}
       </Container>
      
   );
