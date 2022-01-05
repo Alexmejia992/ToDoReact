@@ -1,28 +1,37 @@
 import { stringify } from "postcss";
-import React from "react";
+import React, { useContext} from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import {GlobalContext} from "../Context/tasksProviders"
 
 import shortid from "shortid";
 import Container from "./Container";
 import Tasks from "./Tasks";
 
 export default function IndexPage() {
-    const [tasks, setTasks] = useState([
-        // {name: 'Alexander', shortid: shortid('')}
-      ]);
+    const [task, setTask] = useState({
+        id: '',
+        title: '',
+        description: ''
+      });
     
-      const [task, setTask] = useState("");
-      const [description, setDescription] = useState("");
+      // const [task, setTask] = useState("");
+      // const [description, setDescription] = useState("");
 
+      const {addTask} = useContext(GlobalContext)
       let navigate = useNavigate();
-    
+      
+      const handleChange = (e) => {
+        setTask({...task, [e.target.name]: e.target.value});
+      }
+
       const handleSubmit = async (e) => {
         e.preventDefault();
-        setTasks([...tasks, { task, description, id: shortid.generate() }]);
+        addTask(task)
+        // setTasks([...tasks, { task, description, id: shortid.generate() }]);
         // console.log(tasks);
-        setTask("");
-        setDescription(""); 
+        // setTask("");
+        // setDescription(""); 
         
         navigate('tasks')
       };
@@ -44,18 +53,20 @@ export default function IndexPage() {
           <input
             className="input-text"
             type="text"
+            name="title"
             placeholder="tittle"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
+            value={task.title}
+            onChange={handleChange}
             required
           />
           <textarea 
             rows="2"
             className="input-text"
             type="text"
+            name="description"
             placeholder="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={task.description}
+            onChange={handleChange}
           ></textarea>
           <input
             type="Submit"
