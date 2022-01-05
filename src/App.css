@@ -8,11 +8,20 @@
     @apply font-poppins text-white bg-transparent border border-t-0 border-l-0 border-r-0 focus:outline-none tracking-wide;
 }
 
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
 
 @layer components {
     .sidebar-icon {
       @apply relative flex items-center justify-center 
-      h-12 w-12 mt-2 mb-2 mx-auto  
+      h-12 w-12 mt-2 mb-2 mx-2  
     bg-gray-400 hover:bg-green-600 bg-gray-800 
     text-green-400 hover:text-white
       hover:rounded-xl rounded-3xl
@@ -24,6 +33,16 @@
       @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
       text-white bg-gray-900 
       text-xs font-bold 
-      transition-all duration-100 scale-0 origin-left;
+      transition-all duration-100 scale-0 origin-left z-50;
     }
+    .task-icon {
+      @apply relative flex flex-row items-center justify-center 
+      h-12 w-24 mt-2 mb-2   
+    bg-gray-400 hover:bg-green-600 bg-gray-800 
+    text-green-400 hover:text-white
+      hover:rounded-xl rounded-3xl
+      transition-all duration-300 ease-linear
+      cursor-pointer shadow-lg ;
+    }
+   
 }
